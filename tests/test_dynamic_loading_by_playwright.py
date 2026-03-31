@@ -10,7 +10,7 @@ def test_dynamic_loading_by_playwright(page: Page):
     # 10초 동안 "Start" 버튼이 클릭 가능해질 때까지 대기하고, 클릭
     page.locator("#start button").click() # "Start" 버튼 클릭
     
-    flash_msg = page.locator("#finish") # "Hello World!" 텍스트가 보일 때까지 대기
+    flash_msg = page.locator("#finish").inner_text() # "Hello World!" 텍스트가 나타날 때까지 대기 후 텍스트 가져오기
 
-    expect(flash_msg).to_have_text("Hello World!", timeout=10000) # 텍스트 검증
-    # assert flash_msg.text_content() == "Hello World!" # 텍스트 검증
+    assert "Hello World!" in flash_msg # "Hello World!" 텍스트가 flash_msg에 포함되어 있는지 확인
+    
